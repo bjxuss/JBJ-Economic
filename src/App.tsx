@@ -1,13 +1,13 @@
-import Interes_Simple from "./pages/Interes_Simple"
-
+import RouterComponent from "./Routes/RouterComponent";
+import { BrowserRouter } from "react-router-dom";
 function App() {
-
-
   return (
     <>
-      <Interes_Simple />
+      <BrowserRouter>
+        <RouterComponent />
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
