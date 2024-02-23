@@ -1,36 +1,13 @@
-// import { useState } from "react";
+export function Interes_Simple(capital:number,tasa_interes:number, tiempo:number) {
+    
+    const tasa_interes_porcental:number = tasa_interes / 100
 
-const Valor_Futuro = () => {
+        const convertirTiempo:number = tiempo / 12
 
-    // const [state, setstate] = useState(0)
-  return (
-   <section>
-        <div>
-            <form action="">
-                <label htmlFor="">Capital</label>
-                <input type="number" name="capital" id="" />
+        const interesSimple = capital * tasa_interes_porcental * convertirTiempo
 
-                <label htmlFor="">Interes</label>
-                <input type="number" name="interes" id="" />
+        return interesSimple 
 
-                <label htmlFor="">Tiempo</label>
-                
-                <select name="tiempo" id="">
-                    <option value="Año">Años</option>
-                    <option value="">Intervalo</option>
-                    
-                </select>
-                {/* {calcular_Monto_Final(state,state,state)} */}
-            </form>
-        </div>
-   </section>
-  )
-}
+} 
 
-// function calcular_Monto_Final(capital:number,interes:number, tiempo:number ) {
-//     const interes_decimal:number = interes / 100
-//     return {interes_decimal, tiempo};
 
-// }
-
-export default Valor_Futuro

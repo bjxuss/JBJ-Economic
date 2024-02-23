@@ -1,9 +1,9 @@
-import Valor_Futuro from "../components/01_Interes-Simple/Valor_Futuro"
+import Form from "../components/01_Interes-Simple/Form-IS"
 
 
 const Interes_Simple = () => {
   return (
-    <Valor_Futuro />
+    <Form />
   )
 }
 export default Interes_Simple
