@@ -15,7 +15,9 @@ export default function ButtonHome() {
     <>
       {ButtonList.map((button, index) => {
         return (
-          <button onClick={() => handleClick(button.url)} key={index}>
+          <button className="text-black text-2xl mr-4 p-4 bg-slate-300 rounded-lg 
+                            hover:scale-105 hover:bg-slate-400 duration-200" 
+          onClick={() => handleClick(button.url)} key={index}>
             {button.name}
           </button>
         );
