@@ -1,5 +1,5 @@
 import JBJLogo from "../assets/JBJLogo";
-import ButtonHome from "../components/general/ButtonHome";
+import ButtonHome from "../components/Global/ButtonHome";
 
 export default function Home() {
   return (
