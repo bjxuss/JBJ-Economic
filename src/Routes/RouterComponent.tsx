@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Interes_Simple from "../pages/Interes_Simple";
-import InteresCompuesto from "../pages/InteresCompuesto";
+import InteresCompuesto from "../pages/InteresCompuesto/InteresCompuesto";
 import Anualidad from "../pages/Anualidad";
 
 export default function RouterComponent() {
