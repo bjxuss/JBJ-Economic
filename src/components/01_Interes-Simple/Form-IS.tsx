@@ -120,6 +120,19 @@ const Form = () => {
         return años
     }
 
+    const resetComponents = () => {
+        setmonto(0)
+        setState({
+            capital: 0,
+            interes: 0,
+            tiempo: 0
+        })
+
+        setselectOption("")
+        setInteresD(0)
+
+    }
+
     // Funcion para enviar los datos
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -222,7 +235,7 @@ const Form = () => {
                 
 
              <select name="selectTypeDate" id="" onChange={selectElement}>
-                    <option value="option" disabled>Seleccione una opción</option>
+                    <option value="option" >Seleccione una opción</option>
                     <option value="anio">Año</option>
                     <option value="intervalos">Intervalos</option>
                 </select>
@@ -270,6 +283,8 @@ const Form = () => {
                 <button type="submit"
                     className="bg-green-500 rounded-lg"
                     disabled={(!state.capital && !state.interes) || (!state.tiempo && !state.capital)} >Enviar</button>
+
+                <button onClick={resetComponents}>Limpiar</button>
                 <div className="flex justify-end">
                     <h1 className="text-red-800">Result: <span>{result}</span></h1>
                 </div>
