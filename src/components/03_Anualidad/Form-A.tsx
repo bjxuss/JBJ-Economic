@@ -44,9 +44,9 @@ const AnualidadesForm = () => {
     return (
         <section className="bg-slate-200 rounded-[16px] text-center grid place-content-center max-w-[1000px] w-full aspect-auto mx-[0_auto] px-[0_32px]">
             <form onSubmit={onSubmit}>
-                <InputControl labelName="Capital" inputName="capital" handleInputChange={handleInputChange} value={state.capital} />
-                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} />
-                <InputControl labelName="Tiempo (en meses)" inputName="tiempo" handleInputChange={handleInputChange} value={state.tiempo} />
+                <InputControl labelName="Capital" inputName="capital" type="number" handleInputChange={handleInputChange} value={state.capital} />
+                <InputControl labelName="Tasa de Interés (%)" type="number" inputName="interes" handleInputChange={handleInputChange} value={state.interes} />
+                <InputControl labelName="Tiempo (en meses)" type="number" inputName="tiempo" handleInputChange={handleInputChange} value={state.tiempo} />
                 <button type="submit" className="bg-green-500 rounded-lg">Calcular Valor Actual</button>
                 {error && <p className="text-red-500">{error}</p>} {/* Mostrar mensaje de error si existe */}
                 {result !== null && (
