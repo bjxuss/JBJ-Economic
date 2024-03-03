@@ -10,7 +10,7 @@ export function AnualidadesVf(capital:number,interes:number, tiempo:number) {
       }
     const tasa_interes_porcental:number = interes / 100;
 
-        const convertirTiempo:number = tiempo / 12;
+        const convertirTiempo:number = tiempo / 1;
 
         const anualidades = capital* ((1+tasa_interes_porcental)**convertirTiempo -1 )/tasa_interes_porcental;
 
