@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
-import { AnualidadesVa, FrecuenciaPago } from "./Valor_Actual";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { AnualidadesVa, AnualidadesVf, calcularMontoAnualidad, FrecuenciaPago } from "./Valor_Actual";
 import InputControl from "../Global/InputControl";
 
 interface Anualidades {
@@ -17,7 +17,9 @@ const AnualidadesForm = () => {
         frecuenciaPago: FrecuenciaPago.Anual // Valor predeterminado
     });
 
-    const [result, setResult] = useState<number | null>(null);
+    const [resultVa, setResultVa] = useState<number | null>(null);
+    const [resultVf, setResultVf] = useState<number | null>(null);
+    const [resultMonto, setResultMonto] = useState<number | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
@@ -28,11 +30,20 @@ const AnualidadesForm = () => {
         }));
     };
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { capital, interes, tiempo, frecuenciaPago } = state;
+        if (capital === 0 || interes === 0 || tiempo === 0) {
+            setError("Por favor, complete todos los campos");
+            return;
+        }
         try {
-            const response = AnualidadesVa(state.capital, state.interes, state.tiempo, state.frecuenciaPago); // Pasar frecuenciaPago como argumento
-            setResult(response);
+            const responseVa = AnualidadesVa(capital, interes, tiempo, frecuenciaPago);
+            setResultVa(responseVa);
+            const responseVf = AnualidadesVf(capital, interes, tiempo, frecuenciaPago);
+            setResultVf(responseVf);
+            const responseMonto = calcularMontoAnualidad(responseVf, interes, tiempo, frecuenciaPago);
+            setResultMonto(responseMonto);
             setError(null); // Limpiar errores si no hay excepciones
         } catch (error) {
             if (error instanceof Error) {
@@ -58,10 +69,16 @@ const AnualidadesForm = () => {
                         <option value={FrecuenciaPago.Anual}>Anual</option>
                     </select>
                 </div>
-                <button type="submit" className="bg-green-500 rounded-lg">Calcular Valor Actual</button>
+                <button type="submit" className="bg-green-500 rounded-lg">Calcular</button>
                 {error && <p className="text-red-500">{error}</p>} {/* Mostrar mensaje de error si existe */}
-                {result !== null && (
-                    <h1 className="text-black">Valor Actual de las Anualidades: <span>{result}</span></h1>
+                {resultVa !== null && (
+                    <h1 className="text-black">Valor Actual de las Anualidades: <span>{resultVa}</span></h1>
+                )}
+                {resultVf !== null && (
+                    <h1 className="text-black">Valor Futuro de las Anualidades: <span>{resultVf}</span></h1>
+                )}
+                {resultMonto !== null && (
+                    <h1 className="text-black">Monto de las Anualidades: <span>{resultMonto}</span></h1>
                 )}
             </form>
         </section>
