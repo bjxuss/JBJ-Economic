@@ -33,11 +33,9 @@ const AnualidadesForm = () => {
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { capital, interes, tiempo, frecuenciaPago } = state;
-        if (capital === 0 || interes === 0 || tiempo === 0) {
-            setError("Por favor, complete todos los campos");
-            return;
-        }
-        try {
+//falta validacion de campos       
+       
+try {
             const responseVa = AnualidadesVa(capital, interes, tiempo, frecuenciaPago);
             setResultVa(responseVa);
             const responseVf = AnualidadesVf(capital, interes, tiempo, frecuenciaPago);
