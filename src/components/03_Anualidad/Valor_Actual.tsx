@@ -1,4 +1,3 @@
-// Enum para la Frecuencia de Pago
 export enum FrecuenciaPago {
   Mensual = 12,
   Trimestral = 12,
@@ -14,8 +13,7 @@ export function AnualidadesVa(capital: number, interes: number, tiempo: number, 
   // Convertir el tiempo a la frecuencia de pago
   const convertirTiempo: number = tiempo * frecuencia / 12;
   // Cálculo del valor presente de las anualidades
-  const anualidades: number = capital * ( (1- (1 + tasa_interes_porcental) ** -convertirTiempo ) )/ tasa_interes_porcental;
-
+  const anualidades: number = capital / (((1 + tasa_interes_porcental) ** convertirTiempo - 1) / tasa_interes_porcental);
   return anualidades;
 }
 
