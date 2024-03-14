@@ -188,7 +188,7 @@ export default function Form() {
     <form
       className="flex flex-col gap-2 [&>input]:rounded-md [&>input]:p-2
       [&>div]:flex [&>div]:justify-between [&>div]:item-center [&>div]:gap-4 
-      [&>div>input]:rounded-md [&>div>input]:p-2"
+      [&>div>input]:rounded-md [&>div>input]:p-2 border-l-lime-400"
       onSubmit={calculateResult}
     >
       <div>
