@@ -142,7 +142,7 @@ const AnualidadesForm = () => {
             </div>
             <form onSubmit={onSubmit}>
                 <InputControl labelName="Capital" inputName="capital" handleInputChange={handleInputChange} value={state.capital} type={""} />
-                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} type={""} />
+                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} type={"number"} />
                 <InputControl labelName="Periodos" inputName="tiempo" handleInputChange={handleInputChange} value={state.tiempo} type={""} />
                 <div>
                     <label htmlFor="frecuenciaPago">Frecuencia de Pago:</label>
