@@ -130,7 +130,7 @@ const AnualidadesForm = () => {
     };
     
     return (
-        <section className="bg-slate-200 rounded-[16px] text-center grid place-content-center max-w-[1000px] w-full aspect-auto mx-[0_auto] px-[0_32px]">
+        <>
             <div className="button-group">
                 <button className={tipoCalculo === TipoCalculo.ValorPresente ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorPresente)}>Calcular VP </button>
                 <button className={tipoCalculo === TipoCalculo.ValorFuturo ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorFuturo)}>Calcular VF </button>
@@ -142,18 +142,19 @@ const AnualidadesForm = () => {
             </div>
             <form onSubmit={onSubmit}>
                 <InputControl labelName="Capital" inputName="capital" handleInputChange={handleInputChange} value={state.capital} type={""} />
-                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} type={"number"} />
+                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} type={""} />
                 <InputControl labelName="Periodos" inputName="tiempo" handleInputChange={handleInputChange} value={state.tiempo} type={""} />
                 <div>
                     <label htmlFor="frecuenciaPago">Frecuencia de Pago:</label>
-                    <select name="frecuenciaPago" onChange={handleInputChange} value={state.frecuenciaPago}>
+                    <select name="frecuenciaPago" onChange={handleInputChange} value={state.frecuenciaPago} className="w-22 h-10 rounded-md p-1">
                         <option value={FrecuenciaPago.Mensual}>Mensual</option>
                         <option value={FrecuenciaPago.Trimestral}>Trimestral</option>
                         <option value={FrecuenciaPago.Semestral}>Semestral</option>
                         <option value={FrecuenciaPago.Anual}>Anual</option>
                     </select>
                 </div>
-                <button type="submit" className="bg-green-500 rounded-lg">Calcular</button>
+                <button type="submit" className="bg-orange-500 p-5 rounded-md cursor-pointer text-slate-100 font-semibold text-2xl
+                hover:scale-105 duration-150">Calcular</button>
                 {error && <p className="text-red-500">{error}</p>}
                 {tipoCalculo === TipoCalculo.ValorPresente && resultVa !== null && (
                     <h1 className="text-black">Valor Actual de las Anualidades: <span>{truncateDecimal(resultVa)}</span></h1>
@@ -168,7 +169,7 @@ const AnualidadesForm = () => {
                     <h1 className="text-black">Capital Inicial: <span>{truncateDecimal(resultCapital)}</span></h1>
                 )}
             </form>
-        </section>
+        </>
     );
 };
 
