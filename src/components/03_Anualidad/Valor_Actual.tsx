@@ -5,10 +5,8 @@ export enum FrecuenciaPago {
   Anual = 12
 }
 
-// Función para calcular el valor presente de una serie de pagos periódicos (anualidades)
+//funcion para calcular el valor presente o monto de una anualidad ordinaria funcion provada
 export function AnualidadesVa(capital: number, interes: number, tiempo: number, frecuencia: FrecuenciaPago): number {
-  // Validaciones de entrada
-  
   const tasa_interes_porcental: number = interes / 100;
   // Convertir el tiempo a la frecuencia de pago
   const convertirTiempo: number = tiempo * frecuencia / 12;
@@ -17,10 +15,8 @@ export function AnualidadesVa(capital: number, interes: number, tiempo: number, 
   return anualidades;
 }
 
-// Función para calcular el valor futuro de una serie de pagos periódicos (anualidades)
+// Función para calcular el valor futuro de una anualidad ordinaria funcion provada
 export function AnualidadesVf(capital: number, interes: number, tiempo: number, frecuencia: FrecuenciaPago): number {
-  // Validaciones de entrada
-  
   // Cálculo de la tasa de interés por período
   const tasa_interes_porcental: number = interes / 100;
   // Convertir el tiempo a la frecuencia de pago
@@ -34,16 +30,27 @@ export function AnualidadesVf(capital: number, interes: number, tiempo: number, 
 
 
 
-// Función para calcular el monto (valor futuro) de una serie de pagos periódicos (anualidades)
-export function calcularMontoAnualidad(valorFuturo: number, interes: number, tiempo: number, frecuencia: FrecuenciaPago): number {
-  // Validaciones de entrada
-
+// Función para calcular el monto (valor futuro) de una serie de pagos periódicos (anualidades simples)
+export function calcularMontoAnualidad(capital: number, interes: number, tiempo: number, frecuencia: FrecuenciaPago): number {
   // Cálculo de la tasa de interés por período
   const tasa_interes_porcental: number = interes / 100;
   // Convertir el tiempo a la frecuencia de pago
   const convertirTiempo: number = tiempo * frecuencia / 12;
+  // Cálculo del factor de anualidad
+  const factorAnualidad: number = (1 - Math.pow(1 + tasa_interes_porcental, -convertirTiempo)) / tasa_interes_porcental;
   // Cálculo del monto (valor futuro) de las anualidades
-  const montoAnualidad: number = valorFuturo * tasa_interes_porcental / ((1 + tasa_interes_porcental) ** convertirTiempo - 1);
-
+  const montoAnualidad: number = capital * factorAnualidad;
   return montoAnualidad;
+}
+
+
+
+
+export function calcularCapital(capital: number, interes: number, tiempo: number, ): number {
+ 
+  // Convertir la tasa de interés a formato decimal
+  const tasaInteresDecimal: number = interes / 100;
+  // Calcular el valor presente de la anualidad simple
+  const capitalan: number = capital * ((1 - Math.pow(1 + tasaInteresDecimal/12, -tiempo)) / tasaInteresDecimal/12);
+  return capitalan;
 }

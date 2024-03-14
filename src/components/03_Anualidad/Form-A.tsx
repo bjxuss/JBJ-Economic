@@ -1,8 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { AnualidadesVa, AnualidadesVf, calcularMontoAnualidad, FrecuenciaPago } from "./Valor_Actual";
+import { AnualidadesVa, AnualidadesVf, calcularCapital, calcularMontoAnualidad, FrecuenciaPago } from "./Valor_Actual";
 import InputControl from "../Global/InputControl";
-import "./style.css"; // Importa tu archivo CSS aquí
-
+import "./style.css";
+import vfordinaria from "./img/vfordinarias.png"
+import vasimples from "./img/vasimples.png"
+import vaordinaria from "./img/vaordinaria.png"
+import vfsimple from "./img/vfsilmple.png"
 interface Anualidades {
     capital: number,
     interes: number,
@@ -13,7 +16,8 @@ interface Anualidades {
 enum TipoCalculo {
     ValorPresente,
     ValorFuturo,
-    Monto
+    Monto,
+    Capital
 }
 
 const AnualidadesForm = () => {
@@ -21,12 +25,13 @@ const AnualidadesForm = () => {
         capital: 0,
         interes: 0,
         tiempo: 0,
-        frecuenciaPago: FrecuenciaPago.Anual // Valor predeterminado
+        frecuenciaPago: FrecuenciaPago.Anual 
     });
 
     const [resultVa, setResultVa] = useState<number | null>(null);
     const [resultVf, setResultVf] = useState<number | null>(null);
     const [resultMonto, setResultMonto] = useState<number | null>(null);
+    const [resultCapital, setResultCapital] = useState<number | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [tipoCalculo, setTipoCalculo] = useState<TipoCalculo>(TipoCalculo.ValorPresente);
 
@@ -50,9 +55,11 @@ const AnualidadesForm = () => {
                 const responseVf = AnualidadesVf(capital, interes, tiempo, frecuenciaPago);
                 setResultVf(responseVf);
             } else if (tipoCalculo === TipoCalculo.Monto) {
-                const responseVf = AnualidadesVf(capital, interes, tiempo, frecuenciaPago);
-                const responseMonto = calcularMontoAnualidad(responseVf, interes, tiempo, frecuenciaPago);
+                const responseMonto = calcularMontoAnualidad(capital, interes, tiempo, frecuenciaPago);
                 setResultMonto(responseMonto);
+            } else if (tipoCalculo === TipoCalculo.Capital) {
+                const responseCapital = calcularCapital(capital, interes, tiempo);
+                setResultCapital(responseCapital);
             }
             setError(null);
         } catch (error) {
@@ -69,25 +76,66 @@ const AnualidadesForm = () => {
         return value.toFixed(2);
     };
 
-    const getDescripcion = (tipo: TipoCalculo): string => {
+    const getDescripcion = (tipo: TipoCalculo): JSX.Element => {
         switch (tipo) {
             case TipoCalculo.ValorPresente:
-                return "El Valor Presente (VP) es el valor actual de una serie de flujos de efectivo futuros, descontados a una tasa de interés específica. Representa cuánto vale una cantidad de dinero en el presente, considerando su valor futuro y la tasa de descuento aplicada.";
+                return (
+                    <>
+                        <p>
+                            El Valor Presente (VP) es el valor actual de una serie de flujos de efectivo futuros,
+                            descontados a una tasa de interés específica. Representa cuánto vale una cantidad de
+                            dinero en el presente, considerando su valor futuro y la tasa de descuento aplicada.
+                        </p>
+                        <img style={{display:"block", margin:"auto"}} src={vaordinaria} alt="Descripción Valor Presente" />
+                    </>
+                );
             case TipoCalculo.ValorFuturo:
-                return "El Valor Futuro (VF) es el valor que una inversión tendrá en el futuro, después de acumular intereses o rendimientos a lo largo del tiempo. Representa la cantidad total que se espera que una inversión crezca, incluyendo tanto el principal inicial como los intereses o rendimientos generados.";
+                return (
+                    <>
+                        <p>
+                            El Valor Futuro (VF) es el valor que una inversión tendrá en el futuro, después de
+                            acumular intereses o rendimientos a lo largo del tiempo. Representa la cantidad total que
+                            se espera que una inversión crezca, incluyendo tanto el principal inicial como los
+                            intereses o rendimientos generados.
+                        </p>
+                        <img style={{display:"block", margin:"auto"}} src={vfordinaria} alt="Descripción Valor Futuro" />
+                    </>
+                );
             case TipoCalculo.Monto:
-                return "El Monto de la Anualidad es el valor total de todos los pagos realizados o recibidos en una serie de pagos periódicos iguales, conocidos como anualidades. Es la suma de todos los pagos, incluyendo tanto el capital inicial como los intereses generados durante el período de tiempo especificado.";
+                return (
+                    <>
+                        <p>
+                            El Monto de la Anualidad es el valor total de todos los pagos realizados o recibidos en
+                            una serie de pagos periódicos iguales, conocidos como anualidades. Es la suma de todos los
+                            pagos, incluyendo tanto el capital inicial como los intereses generados durante el período
+                            de tiempo especificado.
+                        </p>
+                        <p>La fórmula para calcular el monto es:</p>
+                        <img style={{display:"block", margin:"auto"}} src={vasimples} alt="Fórmula Monto" />
+                    </>
+                );
+            case TipoCalculo.Capital:
+                return (
+                    <>
+                        <p>
+                            El Capital Inicial es la cantidad de dinero que se invierte inicialmente para generar una
+                            renta o un flujo de efectivo futuro.
+                        </p>
+                        <img style={{display:"block", margin:"auto"}} src={vfsimple} alt="Descripción Capital Inicial" />
+                    </>
+                );
             default:
-                return "";
+                return <></>;
         }
     };
     
     return (
         <section className="bg-slate-200 rounded-[16px] text-center grid place-content-center max-w-[1000px] w-full aspect-auto mx-[0_auto] px-[0_32px]">
             <div className="button-group">
-                <button className={tipoCalculo === TipoCalculo.ValorPresente ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorPresente)}>Calcular Valor Presente</button>
-                <button className={tipoCalculo === TipoCalculo.ValorFuturo ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorFuturo)}>Calcular Valor Futuro</button>
-                <button className={tipoCalculo === TipoCalculo.Monto ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.Monto)}>Calcular Monto</button>
+                <button className={tipoCalculo === TipoCalculo.ValorPresente ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorPresente)}>Calcular VP </button>
+                <button className={tipoCalculo === TipoCalculo.ValorFuturo ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorFuturo)}>Calcular VF </button>
+                <button className={tipoCalculo === TipoCalculo.Monto ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.Monto)}>Calcular Monto </button>
+                <button className={tipoCalculo === TipoCalculo.Capital ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.Capital)}>Calcular Capital</button>
             </div>
             <div className="description">
                 {getDescripcion(tipoCalculo)}
@@ -115,6 +163,9 @@ const AnualidadesForm = () => {
                 )}
                 {tipoCalculo === TipoCalculo.Monto && resultMonto !== null && (
                     <h1 className="text-black">Monto de las Anualidades: <span>{truncateDecimal(resultMonto)}</span></h1>
+                )}
+                {tipoCalculo === TipoCalculo.Capital && resultCapital !== null && (
+                    <h1 className="text-black">Capital Inicial: <span>{truncateDecimal(resultCapital)}</span></h1>
                 )}
             </form>
         </section>
