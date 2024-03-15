@@ -1,16 +1,16 @@
+import AnualidadesdesForm from "../components/03_Anualidad/Form-A"
 import CardsForm from "../components/Global/CardsForm"
-import NominaForm from "../components/nomina/FormNomina"
 
 
-const Nomina = () => {
+const Anualidades = () => {
   return (
     <>
       <div className="flex justify-center items-center text-7xl text-black font-medium pt-10 border-[#967460] ">
-        Nomina docentes.
+        Anualidades
       </div>
-      <CardsForm Component={NominaForm} />
+      <CardsForm Component={AnualidadesdesForm} />
     </>
     
   )
 }
-export default Nomina
+export default Anualidades
