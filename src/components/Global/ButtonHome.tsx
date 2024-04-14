@@ -4,6 +4,7 @@ const ButtonList = [
   { name: "Interés Simple", url: "/is" },
   { name: "Interés Compuesto", url: "/ic" },
   { name: "Anualidad", url: "/an" },
+  { name: "Tasa Interes de Retorno", url: "/tir" }
 ];
 export default function ButtonHome() {
   const navigate = useNavigate();
