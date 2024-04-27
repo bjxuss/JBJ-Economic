@@ -1,9 +1,8 @@
 import React from "react"
 
-type ComponentsProps = {
-  Component: React.ComponentType
+interface ComponentsProps {
+  Component: React.ComponentType<any>;
 }
-
 const CardsForm: React.FC<ComponentsProps> = ({Component}) => {
   return (
     <>

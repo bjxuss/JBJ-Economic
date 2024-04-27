@@ -4,7 +4,11 @@ const ButtonList = [
   { name: "Interés Simple", url: "/is" },
   { name: "Interés Compuesto", url: "/ic" },
   { name: "Anualidad", url: "/an" },
+  { name: "Gradiente", url: "gr"},
+  { name: "Amortización y Capitalización", url: "/ayc"},
+  { name: "TIR", url: "/tir"}
 ];
+
 export default function ButtonHome() {
   const navigate = useNavigate();
 
