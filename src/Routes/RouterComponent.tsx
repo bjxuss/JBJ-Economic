@@ -3,7 +3,6 @@ import Home from "../pages/Home";
 import Interes_Simple from "../pages/Interes_Simple";
 import InteresCompuesto from "../pages/InteresCompuesto/InteresCompuesto";
 import Anualidad from "../pages/Anualidad";
-import Gradiente from "../pages/Gradiente/Gradiente";
 
 export default function RouterComponent() {
   return (
@@ -12,7 +11,6 @@ export default function RouterComponent() {
       <Route path="/is" element={<Interes_Simple/>} />
       <Route path="ic" element={<InteresCompuesto/>} />
       <Route path="/an" element={<Anualidad/>} />
-      <Route path="gr" element={<Gradiente/>}/>
     </Routes>
   );
 }

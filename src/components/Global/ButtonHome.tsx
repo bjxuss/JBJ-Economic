@@ -4,9 +4,13 @@ const ButtonList = [
   { name: "Interés Simple", url: "/is" },
   { name: "Interés Compuesto", url: "/ic" },
   { name: "Anualidad", url: "/an" },
+<<<<<<< HEAD
   { name: "Gradiente", url: "gr"},
   { name: "Amortización y Capitalización", url: "/ayc"},
   { name: "TIR", url: "/tir"}
+=======
+  { name: "Tasa Interes de Retorno", url: "/tir" }
+>>>>>>> eec3473f47cfaee925985c195e0bbc710a1d8f51
 ];
 
 export default function ButtonHome() {
