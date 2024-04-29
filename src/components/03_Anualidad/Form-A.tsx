@@ -141,9 +141,9 @@ const AnualidadesForm = () => {
                 {getDescripcion(tipoCalculo)}
             </div>
             <form onSubmit={onSubmit}>
-                <InputControl labelName="Capital" inputName="capital" handleInputChange={handleInputChange} value={state.capital} type={""} />
-                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} type={""} />
-                <InputControl labelName="Periodos" inputName="tiempo" handleInputChange={handleInputChange} value={state.tiempo} type={""} />
+                <InputControl labelName="Capital" inputName="capital" handleInputChange={handleInputChange} value={state.capital} type={""} className={""} />
+                <InputControl labelName="Tasa de Interés (%)" inputName="interes" handleInputChange={handleInputChange} value={state.interes} type={""} className={""} />
+                <InputControl labelName="Periodos" inputName="tiempo" handleInputChange={handleInputChange} value={state.tiempo} type={""} className={""} />
                 <div>
                     <label htmlFor="frecuenciaPago">Frecuencia de Pago:</label>
                     <select name="frecuenciaPago" onChange={handleInputChange} value={state.frecuenciaPago} className="w-22 h-10 rounded-md p-1">
