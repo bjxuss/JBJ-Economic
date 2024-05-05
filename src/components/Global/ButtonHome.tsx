@@ -6,7 +6,6 @@ const ButtonList = [
   { name: "Anualidad", url: "/an" },
   { name: "Gradiente", url: "gr"},
   { name: "Amortización", url: "/am"},
-  { name: "TIR", url: "/tir"},
   { name: "Tasa Interes de Retorno", url: "/tir" }
 ];
 
