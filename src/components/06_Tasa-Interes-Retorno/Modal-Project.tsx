@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import InputControl from "../Global/InputControl"
 import "./styles/modal-animated-backdrop.css"
-import { calcularTIR, calcularVAN } from "./Formulas"
+import { calcularTIR } from "./Formulas"
 import { MathJaxFormula, MathJaxProvider } from "mathjax3-react"
 
 
@@ -11,8 +11,6 @@ interface Project {
   inversion: number,
   ingresos: Ingresos,
   TIR: number,
-  VAN: number
-
 }
 
 interface Ingresos {
@@ -80,8 +78,7 @@ const Modal_project: React.FC<Props> = (props) => {
       valor: 0,
       periodo: 0
     },
-    TIR: 0,
-    VAN: 0
+    TIR: 0
   })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,6 +93,21 @@ const Modal_project: React.FC<Props> = (props) => {
       [name]: parseFloat(value)
     }));
   }
+
+  const handleInputText = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    const { name, value } = event.target;
+    console.log(name + value);
+
+    // const [fieldName, nestedFieldName] = name.split('.'); // Separar el nombre del campo y el nombre del campo anidado
+
+    setProject(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
+
+
 
 
   // Mostrar la ecuación de la TIR con valores reemplazados
@@ -125,13 +137,12 @@ const Modal_project: React.FC<Props> = (props) => {
 
     const tir: number = calcularTIR(flujosCaja, tasaEstimada);
 
-    const van: number = calcularVAN(flujosCaja, inversion, tasaEstimada)
+    // const van: number = calcularVAN(flujosCaja, inversion, tasaEstimada)
 
 
     setProject(prevState => ({
       ...prevState,
       TIR: tir,
-      VAN: van
     }));
 
 
@@ -165,8 +176,7 @@ const Modal_project: React.FC<Props> = (props) => {
   const ecuacionSoluciones = `
 \\( inversion = ${Project.inversion} \\)
 \\( ingresos = ${incomes.map((ingreso) => ingreso.valor).join(", ")} \\)
-\\( TIR = ${Project.TIR.toFixed(2)}% \\)
-\\( VAN = $ ${Project.VAN.toFixed(2)}\\)`;
+\\( TIR = ${Project.TIR.toFixed(2)}% \\)`;
 
 
 
@@ -175,7 +185,7 @@ const Modal_project: React.FC<Props> = (props) => {
 
 
     <div className="modal is-open">
-      {props.open && (document.body.style.overflow = "hidden")}
+      {/* {props.open && (document.body.style.overflow = "hidden")} */}
 
 
       <div className="modal-container">
@@ -187,7 +197,7 @@ const Modal_project: React.FC<Props> = (props) => {
             inputName="name"
             value={Project.name}
             type="text"
-            handleInputChange={(e) => handleInputChange(e)}
+            handleInputChange={(e) => handleInputText(e)}
             className="input-block input"
             style="input-label"
 
@@ -220,7 +230,7 @@ const Modal_project: React.FC<Props> = (props) => {
 
           <div>
             {incomes.map((income, index) => (
-              <div className="flex [&>div]:mr-2" key={index}>
+              <div className="flex [&>div]:mr-2 [&>div]:w-1/3" key={index}>
 
                 <InputControl divName="input-block"
                   labelName={`Año ${index + 1}: `}
@@ -246,15 +256,23 @@ const Modal_project: React.FC<Props> = (props) => {
                   required={true}
                 />
 
-                {/* Botón para eliminar */}
-                <button onClick={() => removeIncome()} className="text-red-500 ml-2">
+                <div className="flex space-x-1 ">
+                  {/* Botón para eliminar */}
+                <button onClick={() => removeIncome()} className="text-white bg-red-500 rounded-sm flex-grow flex-shrink mb-[5px]">
                   X
                 </button>
+
+                <button onClick={(e) => addIncomes(index, e)} className="text-white bg-green-500 rounded-sm flex-grow flex-shrink mb-[5px]">+</button>
+                  
+                </div>
+                  
+               
+                
               </div>
 
 
             ))}
-            <button onClick={(e) => addIncomes(incomes.length, e)} className="border-orange-300">Añadir más inputs</button>
+            
           </div>
 
 
@@ -272,12 +290,11 @@ const Modal_project: React.FC<Props> = (props) => {
                 <MathJaxFormula formula={ecuacionSoluciones} />
               </MathJaxProvider>
 
-              <h1>{Project.VAN}</h1>
 
               <h1>
                 El proyecto o inversion 
                 <h1 className={Project.TIR > Project.interes ? 'bg-green-500' : 'bg-red-500' }>
-                    {(Project.TIR > Project.interes) && (Project.VAN > 0) ? "es rentable" : "no es rentable"}
+                    {(Project.TIR > Project.interes)  ? "es rentable" : "no es rentable"}
                 </h1>
 
               </h1>

@@ -6,7 +6,6 @@ interface Project {
   name: string,
   interes: number,
   TIR: number,
-  VAN: number
 
 }
 
@@ -18,7 +17,7 @@ const CardProject: React.FC<Project> = (props) => {
   <img
     className="card__background"
     src="https://phototraces.b-cdn.net/wp-content/uploads/2014/09/500px-1.jpg"
-    alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+    alt=""
     width="1920"
     height="2193"
   />
@@ -31,7 +30,7 @@ const CardProject: React.FC<Project> = (props) => {
           <p>{props.TIR}</p>
         </div>
         <div className="duration">
-          <ins>◷</ins>
+          <ins>%</ins>
           <p>{props.interes}</p>
         </div>
       </div>
