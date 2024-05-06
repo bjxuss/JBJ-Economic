@@ -1,7 +1,8 @@
-import AnualidadesdesForm from "../components/03_Anualidad/Form-A"
-import CardsForm from "../components/Global/CardsForm"
-
-
+import AnualidadesdesForm from "../components/03_Anualidad/Form-A";
+import CardsForm from "../components/Global/CardsForm";
+//import capitalizacionImage from "../assets/capitalizacion_formula.png"; // Importa la imagen de la fórmula de la capitalización
+//<img src={capitalizacionImage} alt="Fórmula de Capitalización" className="max-w-lg" />
+      
 const Anualidades = () => {
   return (
     <>
@@ -10,7 +11,7 @@ const Anualidades = () => {
       </div>
       <CardsForm Component={AnualidadesdesForm} />
     </>
-    
-  )
-}
-export default Anualidades
+  );
+};
+
+export default Anualidades;

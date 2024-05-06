@@ -6,6 +6,7 @@ import Anualidad from "../pages/Anualidad";
 import Gradiente from "../pages/Gradiente/Gradiente";
 import Amortizacion from "../pages/Amortizacion";
 import Tasa_Interes_Retorno from "../pages/Tasa_Interes_Retorno";
+import Capitalizacion from "../pages/Capitalizacion";
 
 export default function RouterComponent() {
   return (
@@ -16,6 +17,7 @@ export default function RouterComponent() {
       <Route path="/an" element={<Anualidad/>} />
       <Route path="/gr" element={<Gradiente/>} />
       <Route path="/am" element={<Amortizacion/>} />
+      <Route path="/cap" element={<Capitalizacion/>} />
       <Route path="/tir" element={<Tasa_Interes_Retorno/>} />
     
     </Routes>
