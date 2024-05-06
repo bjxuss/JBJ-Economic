@@ -173,6 +173,11 @@ const Form = () => {
                         El valor presente (VP) es el valor actual de un flujo de dinero futuro. 
                         En otras palabras, representa cuánto vale hoy una cantidad de dinero que recibiremos en el futuro
 
+                        Donde:
+                        * VF es el monto final
+                        * i es la tasa de interes
+                        * t el tiempo
+
                         
                         </strong>
                         <img style={{display:"block", margin:"auto"}} src={vp} alt="Descripción Valor Presente" />
@@ -184,6 +189,11 @@ const Form = () => {
                         <strong className="text-black">
                         El valor futuro (VF) es la cantidad que un monto de dinero actual valdrá en el futuro, 
                         tras aplicarse una tasa de interés específica
+
+                        Donde:
+                        * VP es el valor presente o el capital Inicial
+                        * i es la tasa de Interes
+                        * t es el tiempo
                         </strong>
                         <img style={{display:"block", margin:"auto"}} src={vf} alt="Descripción Valor Futuro" />
                     </>
@@ -193,6 +203,10 @@ const Form = () => {
                     <>
                         <strong className="text-black">
                         El interés simple es una forma de calcular los intereses de un préstamo que solo tiene en cuenta el capital principal.
+                        Donde: 
+                            * c es el capital Inicial
+                            * i es la tasa de interes
+                            * t es el tiempo
 
                         </strong>
                         <strong className="text-black">La fórmula para calcular el interes simple es:</strong>
@@ -204,6 +218,8 @@ const Form = () => {
                     <>
                         <strong className="text-black">
                             Es la cantidad de dinero que se paga por el prestamo del capital.
+
+                            
                         </strong>
                         <img style={{display:"block", margin:"auto"}} src={i} alt="Descripción Capital Inicial" />
                     </>
@@ -214,6 +230,12 @@ const Form = () => {
                         <>
                             <strong className="text-black">
                                 Es la duracion del prestamo
+
+                                Donde: 
+                                * VP es el valor presente o el capital Inicial
+                                * VF es el monto final
+                                * i es la tasa de interes
+
                             </strong>
                             <img style={{display:"block", margin:"auto"}} src={t} alt="Descripción Capital Inicial" />
                         </>
