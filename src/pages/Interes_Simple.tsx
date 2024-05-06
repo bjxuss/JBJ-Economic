@@ -9,6 +9,8 @@ const Interes_Simple = () => {
       <div className="flex justify-center items-center text-7xl text-black font-medium pt-10 border-[#967460] ">
         Interes Simple
       </div>
+      <br />
+     
       <CardsForm Component={Form} />
     </>
 

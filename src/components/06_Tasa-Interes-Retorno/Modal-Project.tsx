@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import InputControl from "../Global/InputControl"
 import "./styles/modal-animated-backdrop.css"
-import { calcularTIR } from "./Formulas"
+import { calcularTIR, calcularVAN } from "./Formulas"
 import { MathJaxFormula, MathJaxProvider } from "mathjax3-react"
 
 
@@ -11,6 +11,7 @@ interface Project {
   inversion: number,
   ingresos: Ingresos,
   TIR: number,
+  VAN: number,
 }
 
 interface Ingresos {
@@ -78,7 +79,8 @@ const Modal_project: React.FC<Props> = (props) => {
       valor: 0,
       periodo: 0
     },
-    TIR: 0
+    TIR: 0,
+    VAN: 0
   })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,12 +139,13 @@ const Modal_project: React.FC<Props> = (props) => {
 
     const tir: number = calcularTIR(flujosCaja, tasaEstimada);
 
-    // const van: number = calcularVAN(flujosCaja, inversion, tasaEstimada)
+    const van: number = calcularVAN(flujosCaja, inversion, tasaEstimada)
 
 
     setProject(prevState => ({
       ...prevState,
       TIR: tir,
+      VAN: van
     }));
 
 
@@ -160,13 +163,6 @@ const Modal_project: React.FC<Props> = (props) => {
   }
 
 
-  useEffect(() => {
-
-    return () => {
-      ecuacionTIR
-    };
-  },)
-
   // Mostrar la ecuación de la TIR con valores reemplazados
   const ecuacionTIR = `$$
   0 = -inversion *  \\sum_{i=0}^{n} \\frac{CF_i}{(1 + r)^i}
@@ -176,7 +172,8 @@ const Modal_project: React.FC<Props> = (props) => {
   const ecuacionSoluciones = `
 \\( inversion = ${Project.inversion} \\)
 \\( ingresos = ${incomes.map((ingreso) => ingreso.valor).join(", ")} \\)
-\\( TIR = ${Project.TIR.toFixed(2)}% \\)`;
+\\( TIR = ${Project.TIR.toFixed(2)}  \\) %
+\\( VAN = $  ${Project.VAN.toFixed(2)}  \\) `;
 
 
 
@@ -258,21 +255,21 @@ const Modal_project: React.FC<Props> = (props) => {
 
                 <div className="flex space-x-1 ">
                   {/* Botón para eliminar */}
-                <button onClick={() => removeIncome()} className="text-white bg-red-500 rounded-sm flex-grow flex-shrink mb-[5px]">
-                  X
-                </button>
+                  <button onClick={() => removeIncome()} className="text-white bg-red-500 rounded-sm flex-grow flex-shrink mb-[5px]">
+                    X
+                  </button>
 
-                <button onClick={(e) => addIncomes(index, e)} className="text-white bg-green-500 rounded-sm flex-grow flex-shrink mb-[5px]">+</button>
-                  
+                  <button onClick={(e) => addIncomes(index, e)} className="text-white bg-green-500 rounded-sm flex-grow flex-shrink mb-[5px]">+</button>
+
                 </div>
-                  
-               
-                
+
+
+
               </div>
 
 
             ))}
-            
+
           </div>
 
 
@@ -283,23 +280,41 @@ const Modal_project: React.FC<Props> = (props) => {
         </div>
         <div className="modal-right">
           <div className="content">
-            <div className="">
-              <h1>{Project.TIR}</h1>
-              <MathJaxProvider>
-                <MathJaxFormula formula={ecuacionTIR} />
-                <MathJaxFormula formula={ecuacionSoluciones} />
-              </MathJaxProvider>
 
 
-              <h1>
-                El proyecto o inversion 
-                <h1 className={Project.TIR > Project.interes ? 'bg-green-500' : 'bg-red-500' }>
-                    {(Project.TIR > Project.interes)  ? "es rentable" : "no es rentable"}
-                </h1>
+            <h1>{Project.TIR}</h1>
+            <br />
 
-              </h1>
+            <p className="font-medium text-black">
+              <strong className="text-black items-center"> ¿Que es?</strong><br />
+              La tasa interna de retorno (TIR) mide la rentabilidad de una inversión. Es decir, cuánto ganas o pierdes, expresado en porcentaje.
+            </p>
 
-            </div>
+            <MathJaxProvider>
+              <MathJaxFormula formula={ecuacionTIR} />
+            </MathJaxProvider>
+
+
+            <MathJaxProvider>
+              <MathJaxFormula formula={ecuacionSoluciones} />
+            </MathJaxProvider>
+
+
+            <p className="text-black">
+              El proyecto o inversión:
+              {/* <strong className={Project.TIR > Project.interes ? 'bg-green-500' : 'bg-red-500'}>
+                    {Project.TIR > Project.interes ? " es rentable" : " no es rentable"}
+                    
+                  </strong> */}
+
+              <strong className={(Project.TIR > Project.interes) && (Project.VAN > 0) ? 'bg-green-500' : 'bg-red-500'}>
+              {(Project.TIR > Project.interes) && (Project.VAN > 0 ) ? " es rentable" : " no es rentable"}
+
+              </strong>
+            </p>
+
+
+
             <div className="modal-buttons">
               <button className="input-button" onClick={createProject}>Guardar</button>
             </div>
