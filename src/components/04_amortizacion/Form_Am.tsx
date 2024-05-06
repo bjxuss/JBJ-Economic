@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import InputControl from "../Global/InputControl";
 import { calcularPagoPeriodicoLineal, calcularPagoPeriodicoFrancesa, calcularPagoPeriodicoAlemana } from "./formula";
 import line from "../../assets/lineal.jpeg"
