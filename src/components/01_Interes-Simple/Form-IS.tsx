@@ -5,6 +5,7 @@ import { FormatDMA, FormatDate } from "./FechasParser";
 import { Capital, Interes_Simple, interes, tasa_interes,  tiempo, valor_Futuro, valor_presente } from "./Formulas";
 import "../03_Anualidad/style.css";
 import va from "../../assets/Captura de pantalla 2024-05-06 070146.png"
+import vp from "../../assets/vp.png"
 import vf from "../../assets/vf.png"
 import i from "../../assets/i.png"
 import t from "../../assets/t.png"
@@ -174,7 +175,7 @@ const Form = () => {
 
                         
                         </strong>
-                        <img style={{display:"block", margin:"auto"}} src={va} alt="Descripción Valor Presente" />
+                        <img style={{display:"block", margin:"auto"}} src={vp} alt="Descripción Valor Presente" />
                     </>
                 );
             case TipoCalculo.ValorFuturo:
