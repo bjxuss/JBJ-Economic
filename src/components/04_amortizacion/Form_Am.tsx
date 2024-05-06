@@ -1,7 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import InputControl from "../Global/InputControl";
 import { calcularPagoPeriodicoLineal, calcularPagoPeriodicoFrancesa, calcularPagoPeriodicoAlemana } from "./formula";
-
+import line from "../../assets/lineal.jpeg"
+import francesa from "../../assets/frabcesa.jpeg"
+import alemana from "../../assets/alemana.jpeg"
 interface Amortizacion {
     montoPrestamo: number,
     tasaInteres: number,
@@ -79,12 +81,12 @@ const AmortizacionForm = () => {
     const renderDescripcionAmortizacion = () => {
         switch (tipoCalculo) {
             case TipoCalculo.Lineal:
-                return <p style={{ color: "black", textAlign: "justify" }}>La amortización lineal implica el pago de una cantidad constante de capital en cada periodo, acompañada por el pago de los intereses sobre el saldo pendiente.</p>;
-            case TipoCalculo.Francesa:
-                return <p style={{ color: "black", textAlign: "justify" }}>La amortización francesa implica el pago de cuotas constantes que incluyen capital e intereses. A medida que se amortiza el capital, los intereses a pagar van disminuyendo.</p>;
-            case TipoCalculo.Alemana:
-                return <p style={{ color: "black", textAlign: "justify" }}>La amortización alemana, también conocida como amortización alemana decreciente, implica el pago de cuotas decrecientes de capital acompañadas de intereses sobre el saldo pendiente.</p>;
-            default:
+                return  <div> <p style={{ color: "black", textAlign: "justify" }}>La amortización lineal implica el pago de una cantidad constante de capital en cada periodo, acompañada por el pago de los intereses sobre el saldo pendiente.</p>. <img  src={line} style={{height: 50}} alt="lineal" /> </div>
+             case TipoCalculo.Francesa:
+                return <div><p style={{ color: "black", textAlign: "justify" }}>La amortización francesa implica el pago de cuotas constantes que incluyen capital e intereses. A medida que se amortiza el capital, los intereses a pagar van disminuyendo. </p>. <img  src={francesa} style={{height: 60}} alt="francesa" /> </div> 
+             case TipoCalculo.Alemana:
+                return <div><p style={{ color: "black", textAlign: "justify" }}>La amortización alemana, también conocida como amortización alemana decreciente, implica el pago de cuotas decrecientes de capital acompañadas de intereses sobre el saldo pendiente.</p>; <img  src={alemana} style={{height: 50}} alt="francesa" /> </div>  
+                 default:
                 return null;
         }
     };
