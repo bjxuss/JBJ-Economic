@@ -92,7 +92,9 @@ const Form = () => {
 
     const compareProjects = () => {
         if (Project.length < 2) {
-            console.log("Se necesitan al menos dos proyectos para comparar.");
+            const rp: string = "Se necesitan al menos dos proyectos para comparar."
+            console.log(rp);
+            setcompare(rp)
             return;
         }
     

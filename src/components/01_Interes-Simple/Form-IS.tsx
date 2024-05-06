@@ -4,6 +4,11 @@ import InputControl from "../Global/InputControl";
 import { FormatDMA, FormatDate } from "./FechasParser";
 import { Capital, Interes_Simple, interes, tasa_interes,  tiempo, valor_Futuro, valor_presente } from "./Formulas";
 import "../03_Anualidad/style.css";
+import va from "../../assets/Captura de pantalla 2024-05-06 070146.png"
+import vf from "../../assets/vf.png"
+import i from "../../assets/i.png"
+import t from "../../assets/t.png"
+
 
 interface Interes {
     capital: number,
@@ -57,7 +62,7 @@ const Form = () => {
 
     const [interesD, setInteresD] = useState<number>(0)
 
-    const [tipoCalculo, setTipoCalculo] = useState<TipoCalculo>();
+    const [tipoCalculo, setTipoCalculo] = useState<TipoCalculo>(TipoCalculo.ValorPresente);
 
 
 
@@ -157,6 +162,66 @@ const Form = () => {
         setResult(0)
 
     }
+
+    const getDescripcion = (tipo: TipoCalculo): JSX.Element => {
+        switch (tipo) {
+            case TipoCalculo.ValorPresente:
+                return (
+                    <>
+                        <strong className="text-black ">
+                        El valor presente (VP) es el valor actual de un flujo de dinero futuro. 
+                        En otras palabras, representa cuánto vale hoy una cantidad de dinero que recibiremos en el futuro
+
+                        
+                        </strong>
+                        <img style={{display:"block", margin:"auto"}} src={va} alt="Descripción Valor Presente" />
+                    </>
+                );
+            case TipoCalculo.ValorFuturo:
+                return (
+                    <>
+                        <strong className="text-black">
+                        El valor futuro (VF) es la cantidad que un monto de dinero actual valdrá en el futuro, 
+                        tras aplicarse una tasa de interés específica
+                        </strong>
+                        <img style={{display:"block", margin:"auto"}} src={vf} alt="Descripción Valor Futuro" />
+                    </>
+                );
+            case TipoCalculo.Interes:
+                return (
+                    <>
+                        <strong className="text-black">
+                        El interés simple es una forma de calcular los intereses de un préstamo que solo tiene en cuenta el capital principal.
+
+                        </strong>
+                        <strong className="text-black">La fórmula para calcular el interes simple es:</strong>
+                        <img style={{display:"block", margin:"auto"}} src={va} alt="Fórmula Interes" />
+                    </>
+                );
+            case TipoCalculo.TasaInteres:
+                return (
+                    <>
+                        <strong className="text-black">
+                            Es la cantidad de dinero que se paga por el prestamo del capital.
+                        </strong>
+                        <img style={{display:"block", margin:"auto"}} src={i} alt="Descripción Capital Inicial" />
+                    </>
+                );
+
+                case TipoCalculo.Tiempo:
+                    return (
+                        <>
+                            <strong className="text-black">
+                                Es la duracion del prestamo
+                            </strong>
+                            <img style={{display:"block", margin:"auto"}} src={t} alt="Descripción Capital Inicial" />
+                        </>
+                    );
+            
+            default:
+                return <></>;
+        }
+    };
 
     // Funcion para enviar los datos
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -341,9 +406,6 @@ const Form = () => {
             [&>div]:flex [&>div]:justify-between [&>div]:item-center [&>div]:gap-4 
             [&>div>input]:rounded-md [&>div>input]:p-2 ">
 
-            {/* <button onClick={handleToggleValidacion} className="bg-emerald-200 block px-3 py-2 rounded-lg">
-                {validacionActivada ?  "Calcular Interes" : "Calcular Monto"}
-            </button> */}
 
             <div className="button-group">
                 <button className={tipoCalculo === TipoCalculo.ValorPresente ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.ValorPresente)}>Calcular Valor Presente </button>
@@ -351,6 +413,10 @@ const Form = () => {
                 <button className={tipoCalculo === TipoCalculo.Tiempo ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.Tiempo)}>Calcular Tiempo</button>
                 <button className={tipoCalculo === TipoCalculo.TasaInteres ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.TasaInteres)}>Calcular Tasa de Interes</button>
                 <button className={tipoCalculo === TipoCalculo.Interes ? "active" : ""} onClick={() => setTipoCalculo(TipoCalculo.Interes)}>Calcular Interes</button>
+            </div>
+
+            <div className="description">
+                {getDescripcion(tipoCalculo)}
             </div>
 
 
@@ -382,21 +448,7 @@ const Form = () => {
                     handleInputChange={handleInputChange}
                     value={state.interes}
                 />
-                {/* <select
-                    id="tasa_interes"
-                    name="tasa_interes"
-                    value={selectedInteresOption}
-                    onChange={selectElement}
-                    className="w-22 h-10 rounded-md p-1"
-                >
-                    <option value="1">Diario</option>
-                    <option value="2">Mensual</option>
-                    <option value="3">Trimestral</option>
-                    <option value="4">Cuatrimestral</option>
-                    <option value="5">Semestral</option>
-                    <option value="6">Anual</option>
-                </select> */}
-            {/* </div> */}
+          
 
 
 
