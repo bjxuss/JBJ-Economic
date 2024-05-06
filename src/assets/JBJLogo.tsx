@@ -10,7 +10,7 @@ export default function JBJLogo() {
     >
       <g
         transform="translate(0.000000,72.000000) scale(0.100000,-0.100000)"
-        fill="#FFFFFF"
+        fill="#000000"
         stroke="none"
       >
         <path d="M410 673 c-41 -15 -112 -116 -93 -133 4 -4 32 -11 61 -15 l52 -7 0 81 c0 45 -1 81 -2 80 -2 0 -10 -3 -18 -6z" />
